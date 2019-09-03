@@ -35,7 +35,7 @@ int sumar(int numeroUno, int numeroDos)
 {
     int resultado;
 
-    numeroUno = numeroUno + numeroDos;
+    resultado = numeroUno + numeroDos;
     printf("El resultado de la suma es %d " ,resultado);
 
     return resultado;
