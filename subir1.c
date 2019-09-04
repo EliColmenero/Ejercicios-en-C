@@ -1,33 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int getIntRange(char*, char*, int , int);
+/*Leer 5 numeros enteros positivos.
+  Indicar cuál es el mayor.
+  Indicar en qué órden fue leído (a que elemento del indice pertenece).
+  Mostrar el vector completo.
+*/
 
 int main()
 {
-    printf("%d" ,getIntRange("Ingrese una nota ", "Error. Ingrese una nota valida " , 0, 10, 3, -1)); //Entre 0 y 10 es el rango
+    int numeros[5];
+    int mayor;
+    int flag = 0;
 
-    return 0;
-}
-int getIntRange(char* mensaje, char* mensjeError, int min, int max, int intentos, int retornoError){
 
-    int numero;
-    int intentos;
-    int retornoError = -1;
+    for(int i = 0; i < 5; i++){
+        printf("Ingrese un numero positivo \n");
+        scanf("%d" ,&numeros[i]);
 
-    printf("%s" ,mensaje);
-    scanf("%d" ,&numero);
-
-    while(numero < min || numero > max){
-        printf("%s", mensajeError);
-        scanf("%d", &numero);
-
-        intentos++;
-        if(intentos > 2){
-            printf("%d" ,&retornoError);
-        }
-        break;
+    while(numeros[i] <= 0){
+        printf("\nIngrese un numero valido. Debe ser positivo\n");
+        scanf("%d" ,&numeros[i]);
     }
 
-    return numero;
+    }
+
+    //Salgo y pongo otro for para buscar el numero mayor
+
+    for(int i = 0; i < 5; i++){
+        if((numeros[i] > mayor) || flag == 0){
+            mayor = numeros[i];
+            flag = 1;
+        }
+    }
+
+    //Si encuentro el numero, muestro el indice para indicar la posicion en la que se encuentra
+
+    printf("El numero mayor es %d \n" ,numeros[i]);
+
+    for(int = 0; i < 5; i++){
+        if(numeros[i] == mayor){
+            printf("%d" ,i);
+        }
+    }
+
+
+    return 0;
 }
