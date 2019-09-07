@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void MostrarVectorInt(int vec[], int tam);
+int obtenerMayor(int vec[], int tam);
+void mostrarIndices(int vec[], int );
+
 int main()
 {
-    int numeros[5];
+    int numeros[];
     int maximo = 0;
     int contador = 0;
     int i;
@@ -15,7 +19,7 @@ int main()
 
     }
 
-    printf("Los numeros ingresados son %d \n" ,&numeros[i]);
+    MostrarVectorInt(numeros[i], 5);
 
 
     for(i = 0; i < 5; i++){
@@ -25,14 +29,25 @@ int main()
     }
     }
 
-    printf("El numero mayor es %d " ,&numeros[i]);
+    printf("El numero mayor es %d " ,numeros[i]);
 
     for(i = 0; i < 5; i++){
         if(numeros[i] == maximo){
-            printf("La posicion del numero que es mayor es %d \n" ,i);
+            printf("La posicion del numero que es mayor es %d \n" ,&i);
         }
     }
 
 
     return 0;
+}
+
+void MostrarVectorInt( int vec[], int tam){
+
+    for (int i = 0; i < tam; i++){
+        printf("%d", vec[i]);
+    }
+}
+
+int obtenerMayor(int vec[], int tam){
+
 }
