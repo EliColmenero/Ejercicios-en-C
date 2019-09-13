@@ -4,6 +4,8 @@
 #define TAM 3
 
 void MostrarAlumnos(int legs[], int ages[], char sexs[], int notasP1[], int notasP2[], float proms[], int tam);
+void MostrarAlumno(int legajo, int edad; char sexo; int notaP1; int notaP2; float promedio);
+void OrdenarLegajos(int legajo);
 
 int main()
 {
@@ -53,5 +55,15 @@ void MostrarAlumnos(int legs, int ages, char sexs, int notasP1, int notasP2, flo
 
 void MostrarAlumno(int legajo, int edad; char sexo; int notaP1; int notaP2; float promedio){
     printf("%d      %d    %c    %d   %d   %2.f" ,legajo, edad, sexo, notaP1, notaP2, promedio);
+
+}
+
+void OrdenarLegajos(int legajos, int tam){
+    int legajos[];
+    int tam;
+
+    for(i = 0; i < tam; i++){
+        mostrarAlumno(legajos[i], tam);
+    }
 
 }
