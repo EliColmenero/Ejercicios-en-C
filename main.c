@@ -1,22 +1,79 @@
 #include <stdio.h>
 #include <stdlib.h>
 
- void changeX(int*);
+#define TAM 3
+
+void pedirVector(int vec[], int tam);
+void mostrarVectorInt(int vec[], int tam);
+int sumarVector(int vec[], int tam);
+int obtenerMayor(int vec[], int tam);
+int obtenerIndice(int vec[], int tam, int num);
+
 
 int main()
 {
-        int x;
+    int numeros[TAM];
+    int suma;
+    int max;
+    int index;
 
-        changeX(&x); //Le paso la direccion de memoria de donde esta x
-        printf("%d" ,x);
+    pedirVector(numeros, TAM);
+    mostrarVectorInt(numeros, TAM);
+    max = obtenerMayor(numeros, TAM);
+    index = obtenerIndice(numeros, TAM, max);
+    suma = sumarVector(numeros, TAM);
+
+    printf("\n la suma es: %d", suma);
+
+    printf("\n el maximo es %d y el indice es %d", max, index);
 
     return 0;
-}
-void changeX(int* puntero){
-    int numero;
+}// FIN MAIN
 
-    //Pasaje de valor por referencia. Le doy permiso a la funcion para que modifique a la otra
-    printf("Ingrese un numero "); //Pido el numero que quiero que se le asigne a x
-    scanf("&d" ,&numero);
-    *puntero = numero; //Le paso al puntero el valor que quiero que tome el x (de variable) en main
+void pedirVector(int vec[], int tam){
+    for(int i = 0; i < tam; i++){
+        printf("Ingrese un numero: ");
+        scanf("%d", &vec[i]);
+    }
+}
+
+
+void mostrarVectorInt(int vec[], int tam){
+    for(int i=0; i<tam; i++){
+        printf("%d ", vec[i]);
+
+    }
+    printf("\n\n");
+}
+
+int sumarVector(int vec[], int tam){
+    int suma = 0;
+     for(int i = 0; i < tam; i++){
+            suma =  suma + vec[i];
+            printf("%d", vec[i]);
+        }
+    return suma;
+}
+
+int obtenerMayor(int vec[], int tam){
+    int max;
+    int flag = 0;
+
+        for(int i=0; i<tam; i++){
+            if(max < vec[i] || flag == 0){
+                max = vec[i];
+                flag = 1;
+            }
+        }
+    return max;
+}
+
+int obtenerIndice(int vec[], int tam, int num){
+    int index = -1;
+     for(int i=0; i<tam; i++){
+        if( vec[i] == num){
+            index = i+1;
+        }
+ }
+ return index;
 }
