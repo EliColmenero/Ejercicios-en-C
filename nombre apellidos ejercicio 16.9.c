@@ -21,6 +21,22 @@ int main()
 
 
 
+   /* Puede ser:
+
+        char nombre[TAM], char apellido[TAM]
+
+        printf("Ingrese el nombre ");
+        gets(nombre);
+
+        printf("Ingrese el apellido ");
+        gets(apellido);
+
+        strcat(apellido, nombre);
+
+        printf(" %s   %s " ,apellido ,nombre);
+
+    */
+
 
     return 0;
 }
@@ -50,3 +66,4 @@ void Completo(char vec[], int tam){
         strcat()
     }
 }
+
