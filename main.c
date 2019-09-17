@@ -1,51 +1,81 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TAM 5
+typedef struct{   //Definicion de la estructura
 
-void mostrarAlumnos(int[], int[], char[], int[], int[], float[], int tam);
-void mostrarAlumno(int legajo, int edad, char sexo, int nota1, int nota2, float promedio);
+    int legajo;
+    int edad;
+    int notaP1;
+    int notaP2;
+    char nombre[20];
+    char sexo;
+    float promedio;
+
+
+    }eAlumno;
+
+
+void MostrarAlumno(eAlumno al);
+void MostrarAlumnos(eAlumno vec[], int tam);
+
 int main()
 {
-    int legajos[TAM] = { 1234, 3322, 4556, 1122, 4532};
-    int edades[TAM] = {22, 34, 21, 45, 20};
-    char sexos[TAM] = {'f', 'f', 'm', 'f', 'm'};
-    int notasP1[TAM] = { 2, 5, 6, 9, 10};
-    int notasP2[TAM] = { 4, 4, 2, 10, 8};
-    float promedios[TAM] = {3, 4.5, 4, 9.5, 9};
+    eAlumno lista[TAM];
+    int i;
 
-   /* for( int i=0; i < TAM; i++){
-        printf("Ingrese legajo: ");
-        scanf("%d", &legajos[i]);
-        printf("Ingrese edad: ");
-        scanf("%d", &edades[i]);
-        printf("Ingrese sexo: ");
-        fflush(stdin);
-        scanf("%c", &sexos[i]);
-        printf("Ingrese Nota parcial 1: ");
-        scanf("%d", &notasP1[i]);
-        printf("Ingrese Nota parcial 2: ");
-        scanf("%d", &notasP2[i]);
-        promedios[i] = (float)  (notasP1[i] + notasP2[i]) / 2;
-    }*/
+    for(i=0 ; i<TAM ;i++){
+    printf("Ingrese legajo \n");
+    scanf("%d" ,&lista[i].legajo);
 
-    mostrarAlumnos(legajos, edades, sexos, notasP1, notasP2, promedios, TAM );
+    printf("Ingrese nombre \n");
+    scanf("%s" ,lista[i].nombre);
+
+    printf("Ingrese edad \n");
+    scanf("%s" ,&lista[i].edad);
+
+    printf("Ingrese de nota parcial 1 \n");
+    scanf("%s" &lista[i].notaP1);
+
+    printf("Ingrese de nota parcial 2 \n");
+    scanf("%s" &lista[i].notaP2);
+
+    printf("Ingrese nombre \n");
+    scanf("%s" ,nombre.alumno1);
+
+    printf("Ingrese sexo \n");
+    scanf("%s" &lista[i].sexo);
+
+    lista[i].promedio = (float) (lista[i].notaP1 + lista[i].notP2) / 2;
+    printf("El promedio es %2.f" ,promedio);
+
+    }
+
+    void MostrarAlumno(eAlumno);
+    void MostrarAlumnos(eAlumno vec[], int tam);
+
+
 
     return 0;
 }
 
+void MostrarAlumno(eAlumno al){
 
-void mostrarAlumnos(int legs[], int ages[], char sexs[], int n1[], int n2[], float proms[], int tam){
+printf("%s %d %d %c %d %d %2.f",
 
-    printf("Legajo  Edad Sexo Nota1 Nota2 Promedio\n\n");
-    for(int i=0; i < tam; i++){
-        mostrarAlumno( legs[i], ages[i], sexs[i], n1[i], n2[i], proms[i]);
-    }
-    printf("\n\n");
+al.nombre,
+al.legajo,
+al.edad,
+al.sexo,
+al.notaP1,
+al.notaP2,
+al.promedio);
 }
 
-void mostrarAlumno(int legajo, int edad, char sexo, int nota1, int nota2, float promedio){
+void MostrarAlumnos(eAlumno vec[], int tam){
 
-    printf("  %d     %d   %c   %d    %d     %.2f\n",
-            legajo, edad, sexo, nota1, nota2, promedio);
+
+    for(i=0; i<tam; i++){
+        MostrarAlumno(vec[i]);
+    }
+    printf("\n\n");
 }
