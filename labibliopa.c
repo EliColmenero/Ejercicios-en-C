@@ -18,22 +18,6 @@ void hardcodePersonas(sPersona listaPersonas[],int cant)
         strcpy(listaPersonas[i].nombre, nombre[i]);
     }
 }
-
-void mostrarPersonas(sPersona listaPersonas[], int cant)
-{
-    int i;
-    for(i=0; i<cant; i++)
-    {
-        printf("%04d %20s \t %02d/%02d/%4d\n", listaPersonas[i].id,
-               listaPersonas[i].nombre,
-               listaPersonas[i].fechaNac.dia,
-               listaPersonas[i].fechaNac.mes,
-               listaPersonas[i].fechaNac.anio);
-
-
-    }
-}
-
 void hardcodeoAutos(sVehiculo listaAutitos[], int cant)
 {
     int i;
@@ -45,7 +29,7 @@ void hardcodeoAutos(sVehiculo listaAutitos[], int cant)
     int anio = {2019};
     int horaIngreso[] = {10,9,8,11,10,11,9,7,7,14};
     int horaSalida[] = {11,11,11,12,14,15,12,10,11,17};
-    int idPersona[]= {101,106,100,106,101,101,100,105,106,106};
+    int idPersona[]= {101,106,106,106,101,101,106,105,106,106};
 
     for(i=0; i<cant; i++)
     {
@@ -60,35 +44,39 @@ void hardcodeoAutos(sVehiculo listaAutitos[], int cant)
 
 }
 
-void mostrarAutitos(sVehiculo listaAutitos[], int cant, sPersona listaPersonas[], int ca)
+
+void mostrarListadoPersonas(sPersona listaPersonas[], int cant)
 {
     int i;
     for(i=0; i<cant; i++)
     {
-        mostrarUnAutito(listaAutitos[i],listaPersonas,ca);
+        printf("%04d %20s \t %02d/%02d/%4d\n", listaPersonas[i].id,
+               listaPersonas[i].nombre,
+               listaPersonas[i].fechaNac.dia,
+               listaPersonas[i].fechaNac.mes,
+               listaPersonas[i].fechaNac.anio);
+
+
     }
 }
-
-int buscarPorPatente(sVehiculo listaAutitos[],int cant)
+void mostrarListadoAutitos(sVehiculo listaAutitos[], int cant, sPersona listaPersonas[], int ca)
 {
     int i;
-    char patente[51];
-    int idDuenio;
-    printf("\nIngresa la patente master : ");
-    fflush(stdin);
-    gets(patente);
     for(i=0; i<cant; i++)
     {
-        if(strcmp(listaAutitos[i].patente, patente) == 0)
-        {
-            idDuenio = listaAutitos[i].idDuenio;
-            break;
-        }
+        mostrarUnAutitoConDuenio(listaAutitos[i],listaPersonas,ca);
     }
-    return -1;
 }
-
-void mostrarUnAutito(sVehiculo unAutito,sPersona listaPersonas[], int cp)
+void mostrarUnAutito(sVehiculo unAutito)
+{
+    printf("%6s %02d %02d %02d/%02d/%4d", unAutito.patente,
+           unAutito.horaIngreso,
+           unAutito.horaSalida,
+           unAutito.fechaIngreso.dia,
+           unAutito.fechaIngreso.mes,
+           unAutito.fechaIngreso.anio);
+}
+void mostrarUnAutitoConDuenio(sVehiculo unAutito,sPersona listaPersonas[], int cp)
 {
     int i;
 
@@ -119,6 +107,71 @@ void mostrarUnaPersona(sPersona unaPersona)
     printf("Nombre : %s \n", unaPersona.nombre);
     printf("Fecha de nacimiento : %d/%d/%d \n\n", unaPersona.fechaNac.dia, unaPersona.fechaNac.mes, unaPersona.fechaNac.anio);
 }
+void mostrarListadoPersonasConSusAutos(sPersona listaPersonas[], int tp, sVehiculo listaVehiculos[], int tv)
+{
+    int i;
+    int j;
+
+    for(i=0; i<tp; i++)
+    {
+        printf("%s:\n", listaPersonas[i].nombre);
+        for(j=0; j<tv; j++)
+        {
+            if(listaPersonas[i].id==listaVehiculos[j].idDuenio)
+            {
+                mostrarUnAutito(listaVehiculos[j]);
+                printf("\n");
+            }
+           // printf("\n");
+        }
+       printf("\n");
+    }
+
+}
+void mostrarListadoAutitosConSusDuenios(sPersona listaPersonas[], int tp, sVehiculo listaVehiculos[], int tv)
+{
+    int i;
+    int j;
+
+    for(i=0; i<tv; i++)
+    {
+        mostrarUnAutito(listaVehiculos[i]);
+        for(j=0; j<tv; j++)
+        {
+            if(listaVehiculos[i].idDuenio==listaPersonas[j].id)
+            {
+               printf(" de: %s \n",listaPersonas[j].nombre);
+            }
+           // printf("\n");
+        }
+       printf("\n");
+    }
+
+}
+
+float CalcularImportePorVehiculo(sVehiculo unAutito,float importePorHora)
+{
+    float resultado;
+     printf("\n%d %d : ",unAutito.horaSalida,unAutito.horaIngreso);
+    resultado=(unAutito.horaSalida-unAutito.horaIngreso  )* importePorHora;
+    return resultado;
+}
+
+int buscarPorPatente(sVehiculo listaAutitos[],int cant)
+{
+    int i;
+    char patente[51];
+    int idVehiculo;
+    printf("\nIngresa la patente master : ");
+    fflush(stdin);
+    gets(patente);
+    for(i=0; i<cant; i++){
+        if(strcmp(listaAutitos[i].patente, patente) == 0){
+            return  i;
+        }
+    }
+    return -1;
+}
 
 int buscarIndicePersona(sPersona unaPersona[],int cant, int id)
 {
@@ -134,104 +187,6 @@ int buscarIndicePersona(sPersona unaPersona[],int cant, int id)
     return -1;
 }
 
-void mostrarPersonasConSusAutos(sPersona listaPersonas[], int tp, sVehiculo listaVehiculos[], int tv)
-{
-    int i;
-    int j;
-
-    for(i=0; i<tp; i++)
-    {
-        printf("\n %s:\n\n", listaPersonas[i].nombre);
-        for(j=0; j<tv; j++)
-        {
-            if(listaPersonas[i].id==listaVehiculos[j].idDuenio)
-            {
-
-                /*printf("  %6s %02d %02d %02d/%02d/%4d\n", listaVehiculos[j].patente,
-                       listaVehiculos[j].horaIngreso,
-                       listaVehiculos[j].horaSalida,
-                       listaVehiculos[j].fechaIngreso.dia,
-                       listaVehiculos[j].fechaIngreso.mes,
-                       listaVehiculos[j].fechaIngreso.anio);*/
-
-                       MostrarUnAutitoSolo(listaVehiculos[j]);
-            }
-           // printf("\n");
-        }
-       printf("\n");
-    }
-
-}
-
-void MostrarUnAutitoSolo(sVehiculo vehiculo){
 
 
-    printf("  %6s %02d %02d %02d/%02d/%4d\n",
-                        vehiculo.patente,
-                       vehiculo.horaIngreso,
-                       vehiculo.horaSalida,
-                       vehiculo.fechaIngreso.dia,
-                       vehiculo.fechaIngreso.mes,
-                       vehiculo.fechaIngreso.anio);
-}
 
-//Para ingresar un dueño y mostrar todos sus autos
-void mostrarPersonaConSusAutos(sPersona listaPersonas[], int tp, sVehiculo listaVehiculos[], int tv){
-
-int i;
-int j;
-int id;
-int flag = 0;
-
-printf("Ingrese el ID \n");
-scanf("%d" ,&id);
-
-
-    for(i=0; i<tp; i++)
-    {
-        //printf("%s:\n", listaPersonas[i].nombre);
-        if(id == listaPersonas[i].id){
-             printf("%s" ,listaPersonas[i].nombre);
-            flag = 1;
-
-        for(j=0; j < tv; j++)
-        {
-
-            if(listaPersonas[i].id==listaVehiculos[j].idDuenio)
-            {
-                MostrarUnAutitoSolo(listaVehiculos[j]);
-            }
-
-        }
-    }
-
-}
-  if(flag == 0){
-        printf("Dato invalido\n");
-    }
-}
-
-void mostrarDuenioConMasAutos(sPersona listaPersonas[], int tp, sVehiculo listaVehiculos[], int tv){
-    int max;
-    int vehiculosC[tv];
-    int flag = 0;
-    int i;
-
-    for(i = 0; i < tv; i++){
-        vehiculosC[i] = mostrarPersonaConSusAutos(listaPersonas, tp, listaVehiculos, tv);
-    }
-
-    for(i = 0; i < tv; i++){
-        if(mayor < vehiculosC[i] || flag == 0){
-            mayor = vehiculosC[i];
-            flag = 1;
-        }
-    }
-
-    for(i = 0; i < tp; i++){
-        if(vehiculosC == mayor){
-            printf("%s" ,listaPersonas[i].nombre);
-        }
-    }
-
-}

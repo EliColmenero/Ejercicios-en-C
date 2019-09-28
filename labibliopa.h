@@ -31,17 +31,19 @@ typedef struct
 void hardcodePersonas(sPersona [],int);
 void hardcodeoAutos(sVehiculo [],int);
 
-void mostrarPersonas(sPersona [],int);
-void mostrarAutitos(sVehiculo [],int, sPersona[],int);
+void mostrarListadoPersonas(sPersona [],int);
+void mostrarListadoAutitos(sVehiculo [],int, sPersona[],int);
+void mostrarListadoAutitosConSusDuenios(sPersona listaPersonas[], int tp, sVehiculo listaVehiculos[], int tv);
+void mostrarListadoPersonasConSusAutos(sPersona listaPersonas[], int tp, sVehiculo listaVehiculos[], int tv);
 
 int buscarPorPatente(sVehiculo [],int);
 
-void mostrarUnAutito(sVehiculo, sPersona[], int);
+void mostrarUnAutito(sVehiculo);
+void mostrarUnAutitoConDuenio(sVehiculo, sPersona[], int);
 void mostrarUnaPersona(sPersona);
 
 int buscarIndicePersona(sPersona[], int, int);
 
-void mostrarPersonasConSusAutos(sPersona[], int, sVehiculo[], int);
+float CalcularImportePorVehiculo(sVehiculo unAutito,float importePorHora);
 
-void mostrarPersonaConSusAutos(sPersona listaPersonas[], int tp, sVehiculo listaVehiculos[], int tv);
 
